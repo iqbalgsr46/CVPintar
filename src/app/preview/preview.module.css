@@ -1,0 +1,254 @@
+.container {
+  min-height: 100vh;
+  background: #111113;
+  color: #fff;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomBar {
+  position: fixed;
+  bottom: 2rem;
+  left: 0;
+  width: 100%;
+  padding: 0 1rem;
+  background: transparent;
+  backdrop-filter: none;
+  border-top: none;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.bottomBarInner {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 15, 17, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 0.5rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.5);
+  pointer-events: auto;
+}
+
+.backBtn {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  color: #a1a1aa;
+  padding: 0.8rem 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+.backBtn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.payBtn {
+  flex: 1;
+  background: #8b5cf6;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.payBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+}
+
+.canvasWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem 6rem 1rem;
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+}
+
+/* ============================================
+   A4 PAPER CONTAINER
+   ============================================ */
+.a4Paper {
+  container-type: inline-size;
+  aspect-ratio: 210 / 297;
+  width: 2100px;
+  max-width: 100%;
+  max-height: calc(100dvh - 8rem);
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  position: relative;
+  padding: 6cqw 8cqw;
+  font-family: 'Calibri', 'Arial', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  overflow: hidden;
+  margin: auto;
+}
+
+/* Watermark */
+.watermarkContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 15cqw;
+  padding: 5cqw;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.watermarkItem {
+  font-size: 8cqw;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5cqw;
+  transform: rotate(-35deg);
+}
+
+/* ============================================
+   CV HEADER (Nama + Kontak)
+   ============================================ */
+.cvHeader {
+  text-align: center;
+  margin-bottom: 2cqw;
+}
+
+.cvName {
+  font-size: 4.5cqw;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4cqw;
+  color: #111;
+  margin-bottom: 1cqw;
+}
+
+.cvContact {
+  font-size: 1.8cqw;
+  color: #444;
+  line-height: 1.6;
+}
+
+.cvDivider {
+  height: 0.4cqw;
+  background: #111;
+  margin-bottom: 3cqw;
+}
+
+/* ============================================
+   CV SECTIONS
+   ============================================ */
+.cvSection {
+  margin-bottom: 2.5cqw;
+}
+
+.cvSectionTitle {
+  font-size: 2.2cqw;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2cqw;
+  color: #111;
+  margin-bottom: 0.3cqw;
+}
+
+.cvDividerThin {
+  height: 0.15cqw;
+  background: #999;
+  margin-bottom: 1.5cqw;
+}
+
+/* ============================================
+   CV ENTRIES (Experience, Education)
+   ============================================ */
+.cvEntry {
+  margin-bottom: 2cqw;
+}
+
+.cvEntryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 2cqw;
+}
+
+.cvBold {
+  font-weight: 700;
+  color: #111;
+}
+
+.cvDate {
+  font-size: 1.8cqw;
+  color: #555;
+  white-space: nowrap;
+}
+
+.cvRole {
+  font-size: 1.9cqw;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 0.5cqw;
+}
+
+.cvDesc {
+  font-size: 1.8cqw;
+  color: #333;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  padding-left: 2cqw;
+}
+
+.cvText {
+  font-size: 1.9cqw;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+}
+
+/* ============================================
+   LEGACY (keep for compatibility)
+   ============================================ */
+.name { display: none; }
+.contact { display: none; }
+.summary { display: none; }
+.sectionHeader { display: none; }
+.entry { display: none; }
+.entryTop { display: none; }
+.entrySub { display: none; }
+.entryDesc { display: none; }
+.skillsText { display: none; }

@@ -1,0 +1,23 @@
+/* Shrink spacing on short screens to prevent cutoff */
+@media (max-height: 750px) {
+  .textContainer {
+    margin-bottom: 1.5rem !important;
+  }
+  .title {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .inputGroup {
+    margin-bottom: 1rem !important;
+  }
+  .inputWrapper {
+    padding: 0.8rem 1rem !important;
+  }
+  .ctaBtn {
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+  .collage {
+    gap: 1rem !important;
+  }
+}
