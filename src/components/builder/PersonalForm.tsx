@@ -127,7 +127,7 @@ export default function PersonalForm({ data, updateData }: { data: CVData, updat
 
       <div className={styles.formGroup}>
         <label>Nama Lengkap&nbsp;<span style={{ color: 'red' }}>*</span></label>
-        <input name="fullName" className={styles.input} value={data.personal.fullName} onChange={handleChange} placeholder="Contoh: Tubagus Iqbal Husaeni" />
+        <input name="fullName" className={styles.input} value={data.personal.fullName} onChange={handleChange} placeholder="Contoh: Marsya Akina" />
       </div>
       
       <div className={styles.grid2}>
