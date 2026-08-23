@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "CVPintar",
     images: [
       {
-        url: "/images/logo-cvpintar.png",
+        url: "/images/cv-logo-link-new.jpeg",
         width: 512,
         height: 512,
         alt: "CVPintar Logo",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "CVPintar - Buat CV ATS Friendly dengan AI",
     description: "Buat CV profesional dan ATS-friendly secara otomatis dengan teknologi AI dari CVPintar.",
-    images: ["/images/logo-cvpintar.png"],
+    images: ["/images/cv-logo-link-new.jpeg"],
   },
 };
 
