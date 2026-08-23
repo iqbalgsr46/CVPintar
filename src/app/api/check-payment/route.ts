@@ -16,3 +16,21 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ paid: true });
 }
+
+/**
+ * DELETE: Reset payment status by clearing the httpOnly cookie.
+ * NOTE: The receipt image hash remains in the anti-fraud database 
+ * (used-receipts.json), so the same receipt can NEVER be reused.
+ * This only allows the user to start a new CV with a new payment.
+ */
+export async function DELETE() {
+  const res = NextResponse.json({ success: true });
+  res.cookies.set('cvpintar_token', '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 0, // Immediately expire the cookie
+    path: '/',
+  });
+  return res;
+}

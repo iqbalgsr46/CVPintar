@@ -87,8 +87,11 @@ export default function BuilderPage() {
                   cancelButtonColor: '#3f3f46',
                   confirmButtonText: 'Ya, Hapus & Reset',
                   cancelButtonText: 'Batal'
-                }).then((result) => {
+                }).then(async (result) => {
                   if (result.isConfirmed) {
+                    // Clear httpOnly cookie via server-side API
+                    await fetch('/api/check-payment', { method: 'DELETE' });
+                    // Clear local data
                     localStorage.removeItem('cvpintar_data');
                     window.location.reload();
                   }
