@@ -73,10 +73,31 @@ export async function POST(req: NextRequest) {
     }
 
     // ── AI Verification ─────────────────────────────────────
-    const today = new Date();
-    const dateStr = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-    const shortDate = today.toLocaleDateString('id-ID', { day: 'numeric', month: 'numeric', year: 'numeric' });
-    const shortDate2 = today.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+    // ── TIMEZONE FIX: Force WIB (UTC+7) ──────────────────────
+    // Vercel servers run in UTC. Indonesian users are in WIB (UTC+7).
+    // At midnight WIB boundary, UTC is still the previous day.
+    // We generate today AND yesterday dates (WIB) so transfers
+    // made near midnight are never falsely rejected.
+    const wibOptions: Intl.DateTimeFormatOptions & { timeZone: string } = { timeZone: 'Asia/Jakarta' };
+    
+    const todayWIB = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+    const yesterdayWIB = new Date(todayWIB);
+    yesterdayWIB.setDate(yesterdayWIB.getDate() - 1);
+
+    const formatDate = (d: Date) => ({
+      long: d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric', ...wibOptions }),
+      short: d.toLocaleDateString('id-ID', { day: 'numeric', month: 'numeric', year: 'numeric', ...wibOptions }),
+      short2: d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', ...wibOptions }),
+    });
+
+    const todayFmt = formatDate(todayWIB);
+    const yesterdayFmt = formatDate(yesterdayWIB);
+
+    const allowedDates = [
+      todayFmt.long, todayFmt.short, todayFmt.short2,
+      yesterdayFmt.long, yesterdayFmt.short, yesterdayFmt.short2,
+      'Hari ini',
+    ].join(', ');
 
     const prompt = `
       Anda adalah sistem keamanan (Security & Fraud Detection) untuk verifikasi pembayaran otomatis.
@@ -87,7 +108,7 @@ export async function POST(req: NextRequest) {
       1. STATUS BERHASIL: Harus ada indikasi "Berhasil", "Success", atau "Sukses".
       2. NOMINAL TEPAT: HARUS tepat Rp 10.000.
       3. TOKO TUJUAN: Penerima berhubungan dengan "DevTech AI Store" atau "DevTech" (opsional).
-      4. TANGGAL HARI INI: Tanggal harus ${dateStr}, ${shortDate}, ${shortDate2}, atau "Hari ini". TOLAK struk lama.
+      4. TANGGAL: Tanggal transaksi harus salah satu dari: ${allowedDates}. TOLAK struk yang lebih dari 1 hari yang lalu.
       5. KEASLIAN: BUKAN gambar editan, generator struk palsu, atau cropping mencurigakan.
 
       WAJIB EKSTRAK SIDIK JARI STRUK:
