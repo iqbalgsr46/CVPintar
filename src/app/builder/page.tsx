@@ -53,7 +53,7 @@ export default function BuilderPage() {
           <div style={{ display: 'inline-flex', padding: '1rem', background: '#f3e8ff', borderRadius: '50%', marginBottom: '1.5rem', color: '#8b5cf6' }}>
             <Lock size={48} strokeWidth={1.5} />
           </div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>Akses Terkunci</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem', color: '#1e1b4b' }}>Akses Terkunci</h2>
           <p style={{ color: '#52525b', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem' }}>
             CV Anda saat ini telah berstatus <b>Lunas</b> dan siap diunduh.<br/><br/>
             Untuk mencegah penyalahgunaan, formulir pengeditan data dikunci sementara.
