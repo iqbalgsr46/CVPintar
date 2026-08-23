@@ -15,13 +15,13 @@ export default function PricingSection() {
         <motion.div 
           className={missionStyles.blob}
           initial={{ opacity: 0, scale: 0.8 }}
-          viewport={{ root: scrollRef, once: true }} whileInView={{ opacity: 0.7, scale: 1 }}
+          viewport={{ root: scrollRef, once: false }} whileInView={{ opacity: 0.7, scale: 1 }}
           transition={{ duration: 0.8 }}
         />
         <motion.div 
           className={missionStyles.face}
           initial={{ opacity: 0, y: 20 }}
-          viewport={{ root: scrollRef, once: true }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ root: scrollRef, once: false }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <svg className={missionStyles.faceSvg} viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,7 @@ export default function PricingSection() {
       <motion.div 
         className={missionStyles.textContent}
         initial={{ opacity: 0, y: 20 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         <h1 className={missionStyles.title}>
@@ -49,7 +49,7 @@ export default function PricingSection() {
       <motion.div 
         className={missionStyles.stepsContainer}
         initial={{ opacity: 0, y: 30 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <div className={missionStyles.stepBox}>
@@ -81,7 +81,7 @@ export default function PricingSection() {
         className={missionStyles.ctaBtn} 
         onClick={() => router.push("/builder")}
         initial={{ opacity: 0, y: 30 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
         Buat CV Sekarang

@@ -52,7 +52,7 @@ export default function HeroSection() {
       <motion.div 
         className={styles.heroTopImage}
         initial={{ opacity: 0, y: -20 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <Image 
@@ -67,7 +67,7 @@ export default function HeroSection() {
       <motion.div 
         className={styles.contentWrapper}
         initial={{ opacity: 0, y: 50 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className={styles.centerLogo} style={{ background: 'transparent', boxShadow: 'none' }}>

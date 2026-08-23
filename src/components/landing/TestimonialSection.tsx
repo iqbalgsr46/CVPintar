@@ -14,7 +14,7 @@ export default function TestimonialSection() {
       <motion.section 
         className={missionStyles.textContent}
         initial={{ opacity: 0, y: 30 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h1 className={missionStyles.title} style={{ fontSize: '1.8rem' }}>Ada yang bisa dibantu?</h1>
@@ -26,7 +26,7 @@ export default function TestimonialSection() {
       <motion.section 
         className={missionStyles.cardSection}
         initial={{ opacity: 0, y: 50 }}
-        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         style={{ padding: '0 1.5rem', marginBottom: '2rem' }}
       >
