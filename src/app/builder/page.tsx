@@ -45,10 +45,17 @@ export default function BuilderPage() {
 
   if (isPaid) {
     return (
-      <div className={styles.container} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem' }}>
+      <motion.div 
+        className={styles.container} 
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }} 
-          animate={{ scale: 1, opacity: 1 }} 
+          initial={{ scale: 0.85, opacity: 0, y: 30 }} 
+          animate={{ scale: 1, opacity: 1, y: 0 }} 
+          transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.2 }}
           className={styles.itemCard}
           style={{ maxWidth: '400px', textAlign: 'center', padding: '3rem 2rem' }}
         >
@@ -95,7 +102,7 @@ export default function BuilderPage() {
             </button>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     );
   }
 
