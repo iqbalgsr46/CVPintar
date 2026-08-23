@@ -2,46 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 import { createHash } from 'crypto';
 import { createPaymentToken } from '@/lib/payment-token';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { checkHashExists, checkFingerprintExists, saveReceipt } from '@/lib/receipt-store';
 
 export const maxDuration = 30;
-
-// ============================================================
-// ANTI-FRAUD: File-based persistent storage
-// Data survives server restarts & hot reloads
-// ============================================================
-
-const DATA_DIR = join(process.cwd(), 'data');
-const RECEIPTS_FILE = join(DATA_DIR, 'used-receipts.json');
-
-interface UsedReceipts {
-  hashes: string[];       // SHA-256 of uploaded images
-  fingerprints: string[]; // AI-extracted receipt fingerprints
-}
-
-function loadReceipts(): UsedReceipts {
-  try {
-    if (existsSync(RECEIPTS_FILE)) {
-      const raw = readFileSync(RECEIPTS_FILE, 'utf-8');
-      return JSON.parse(raw);
-    }
-  } catch (e) {
-    console.warn('Failed to load receipts file, creating new one.');
-  }
-  return { hashes: [], fingerprints: [] };
-}
-
-function saveReceipts(data: UsedReceipts) {
-  try {
-    if (!existsSync(DATA_DIR)) {
-      mkdirSync(DATA_DIR, { recursive: true });
-    }
-    writeFileSync(RECEIPTS_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  } catch (e) {
-    console.error('Failed to save receipts file:', e);
-  }
-}
 
 const models = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite'];
 
@@ -59,13 +22,10 @@ export async function POST(req: NextRequest) {
     const base64Image = nodeBuffer.toString('base64');
     const mimeType = image.type;
 
-    // Load persistent data
-    const receipts = loadReceipts();
-
     // ── LAYER 1: Exact image hash ───────────────────────────
     const imageHash = createHash('sha256').update(nodeBuffer).digest('hex');
 
-    if (receipts.hashes.includes(imageHash)) {
+    if (await checkHashExists(imageHash)) {
       return NextResponse.json({
         isValid: false,
         reason: 'Gambar ini sudah pernah digunakan. Silakan lakukan pembayaran baru dan upload bukti transfer yang baru.'
@@ -74,10 +34,6 @@ export async function POST(req: NextRequest) {
 
     // ── AI Verification ─────────────────────────────────────
     // ── TIMEZONE FIX: Force WIB (UTC+7) ──────────────────────
-    // Vercel servers run in UTC. Indonesian users are in WIB (UTC+7).
-    // At midnight WIB boundary, UTC is still the previous day.
-    // We generate today AND yesterday dates (WIB) so transfers
-    // made near midnight are never falsely rejected.
     const wibOptions: Intl.DateTimeFormatOptions & { timeZone: string } = { timeZone: 'Asia/Jakarta' };
     
     const todayWIB = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
@@ -154,22 +110,21 @@ export async function POST(req: NextRequest) {
     // ── LAYER 3: AI fingerprint duplicate check ─────────────
     if (parsed.isValid) {
       const fp = (parsed.fingerprint || '').trim().toUpperCase();
+      let normalizedFP: string | undefined;
 
       if (fp && fp !== 'NONE' && fp.length > 5) {
-        const normalizedFP = fp.replace(/[\s\-\/\.]/g, '');
+        normalizedFP = fp.replace(/[\s\-\/\.]/g, '');
 
-        if (receipts.fingerprints.includes(normalizedFP)) {
+        if (await checkFingerprintExists(normalizedFP!)) {
           return NextResponse.json({
             isValid: false,
             reason: 'Struk ini sudah pernah digunakan. Setiap bukti transfer hanya bisa dipakai satu kali.'
           });
         }
-        receipts.fingerprints.push(normalizedFP);
       }
 
-      // All layers passed — persist to disk
-      receipts.hashes.push(imageHash);
-      saveReceipts(receipts);
+      // All layers passed — persist to Redis/file
+      await saveReceipt(imageHash, normalizedFP);
 
       // Create signed payment token and set HTTP-only cookie
       const token = createPaymentToken(imageHash);

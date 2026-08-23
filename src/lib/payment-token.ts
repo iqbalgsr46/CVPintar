@@ -1,7 +1,11 @@
-import { createHash, createHmac } from 'crypto';
+import { createHash, createHmac, randomBytes } from 'crypto';
 
-// Secret key for signing payment tokens (in production, use env var)
-const SECRET = process.env.PAYMENT_SECRET || 'cvpintar-payment-secret-key-2024';
+// Secret key for signing payment tokens
+// MUST be set via PAYMENT_SECRET env var in production
+const SECRET = process.env.PAYMENT_SECRET || (() => {
+  console.warn('⚠️  PAYMENT_SECRET env var not set! Using random secret (tokens will not survive restarts).');
+  return randomBytes(32).toString('hex');
+})();
 
 export interface PaymentToken {
   paid: boolean;
