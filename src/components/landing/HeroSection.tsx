@@ -95,7 +95,7 @@ export default function HeroSection() {
         <h1 className={styles.title}>Bikin CV Pro<br />Secara Otomatis!</h1>
         <p className={styles.subtitle}>Stop pusing mikirin format! Biar AI kami<br />yang merangkai CV-mu.</p>
         
-        <Link href="/builder" style={{ textDecoration: 'none' }}>
+        <Link href="/builder" style={{ textDecoration: 'none', width: '100%', display: 'flex', justifyContent: 'center' }}>
           <div className={styles.promptBox}>
             <div className={styles.promptText}>
               {text}

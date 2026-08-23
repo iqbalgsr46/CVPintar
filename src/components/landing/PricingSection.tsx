@@ -78,7 +78,7 @@ export default function PricingSection() {
         </div>
       </motion.div>
 
-      <Link href="/builder" style={{ textDecoration: 'none' }}>
+      <Link href="/builder" style={{ textDecoration: 'none', width: '100%', display: 'flex', justifyContent: 'center' }}>
         <motion.button 
           className={missionStyles.ctaBtn} 
           initial={{ opacity: 0, y: 30 }}
