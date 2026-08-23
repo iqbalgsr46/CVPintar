@@ -19,7 +19,7 @@ export default function HelloSplashScreen({ onComplete }: { onComplete: () => vo
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { duration: 2.2, ease: [0.45, 0, 0.15, 1] },
+        pathLength: { duration: 2.2, ease: "easeInOut" },
         opacity: { duration: 0.1 }
       }
     }
