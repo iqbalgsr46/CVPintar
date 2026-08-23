@@ -31,15 +31,17 @@ export default function BuilderPage() {
   const router = useRouter();
   const { data, updateData, isLoaded } = useCVData();
   const [isPaid, setIsPaid] = React.useState(false);
+  const [checkingPayment, setCheckingPayment] = React.useState(true);
 
   React.useEffect(() => {
     fetch('/api/check-payment')
       .then(res => res.json())
       .then(data => { if (data.paid) setIsPaid(true); })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setCheckingPayment(false));
   }, []);
 
-  if (!isLoaded) return <div className={styles.container}></div>;
+  if (!isLoaded || checkingPayment) return <div className={styles.container}></div>;
 
   if (isPaid) {
     return (
