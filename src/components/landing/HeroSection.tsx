@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./splash.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { ScrollContext } from "@/app/page";
 
 const PHRASES = [
   "Buat CV profesional dalam 2 menit dengan AI...",
@@ -12,6 +14,7 @@ const PHRASES = [
 
 export default function HeroSection() {
   const router = useRouter();
+  const scrollRef = useContext(ScrollContext) as any;
   
   const [text, setText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -49,7 +52,7 @@ export default function HeroSection() {
       <motion.div 
         className={styles.heroTopImage}
         initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <Image 
@@ -64,7 +67,7 @@ export default function HeroSection() {
       <motion.div 
         className={styles.contentWrapper}
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className={styles.centerLogo} style={{ background: 'transparent', boxShadow: 'none' }}>

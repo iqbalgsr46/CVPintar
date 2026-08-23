@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: #111113;
   color: #fff;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, system-ui, sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -135,7 +135,7 @@
   font-weight: 900;
   color: rgba(0, 0, 0, 0.05);
   white-space: nowrap;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, system-ui, sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.5cqw;
   transform: rotate(-35deg);
@@ -252,3 +252,61 @@
 .entrySub { display: none; }
 .entryDesc { display: none; }
 .skillsText { display: none; }
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #fff;
+  }
+  .container {
+    background: transparent;
+    min-height: auto;
+    padding: 0;
+    display: block;
+  }
+  .canvasWrapper {
+    padding: 0;
+    overflow: visible;
+    display: block;
+  }
+  .bottomBar {
+    display: none !important;
+  }
+  .a4Paper {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 15mm 20mm !important;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    max-height: none !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    aspect-ratio: auto;
+    height: 297mm;
+  }
+}
+.btnWord {
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 100px;
+  flex: 1;
+}
+.btnWord:hover {
+  background: #2563eb;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+.btnPdf {
+  background: #ef4444;
+  color: #fff;
+  border-radius: 100px;
+  flex: 1;
+}
+.btnPdf:hover {
+  background: #dc2626;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+}

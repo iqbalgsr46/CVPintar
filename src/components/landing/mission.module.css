@@ -6,7 +6,7 @@
   height: 100dvh;
   flex: 0 0 100dvh;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
   display: flex;
   flex-direction: column;
   color: #fff;

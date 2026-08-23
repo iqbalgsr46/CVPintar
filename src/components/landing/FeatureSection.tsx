@@ -1,10 +1,13 @@
+import { useContext } from "react";
 
 import styles from "./home.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { ScrollContext } from "@/app/page";
 
 export default function FeatureSection() {
   const router = useRouter();
+  const scrollRef = useContext(ScrollContext) as any;
 
   return (
     <section id="fitur" className={styles.mainContainer}>
@@ -12,7 +15,7 @@ export default function FeatureSection() {
       <motion.div 
         className={styles.textContainer}
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <h2 className={styles.title}>Lolos Seleksi<br />Otomatis HRD!</h2>
@@ -22,7 +25,7 @@ export default function FeatureSection() {
       <motion.div 
         className={styles.graphicContainer}
         initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <div className={styles.cvMockup}>
@@ -72,7 +75,7 @@ export default function FeatureSection() {
       <motion.div 
         className={styles.actionContainer}
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <button className={styles.primaryBtn} onClick={() => router.push("/builder")}>

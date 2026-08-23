@@ -171,7 +171,7 @@ textarea.input {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
-  padding: 2.5rem;
+  padding: 3.5rem 2.5rem 2.5rem; /* extra top padding for removeBtn */
   position: relative;
   transition: all 0.3s ease;
 }
@@ -263,7 +263,7 @@ textarea.input {
     border-radius: 10px;
   }
   .itemCard {
-    padding: 2rem 1rem 1.5rem; /* give top padding for the trash icon */
+    padding: 3.5rem 1rem 1.5rem; /* give top padding for the trash icon */
   }
   .removeBtn {
     top: 0.5rem;

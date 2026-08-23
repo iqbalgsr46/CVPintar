@@ -1,16 +1,19 @@
+import { useContext } from "react";
 import missionStyles from "./mission.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { ScrollContext } from "@/app/page";
 
 export default function PricingSection() {
   const router = useRouter();
+  const scrollRef = useContext(ScrollContext) as any;
 
   return (
     <section id="cara-kerja" className={missionStyles.container}>
       <motion.section 
         className={missionStyles.textContent}
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h1 className={missionStyles.title}>Cara Kerja AI</h1>
@@ -22,7 +25,7 @@ export default function PricingSection() {
       <motion.section 
         className={missionStyles.cardSection}
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <div className={missionStyles.stepsContainer}>

@@ -8,6 +8,7 @@ export type Experience = {
   position: string;
   yearStart: string;
   yearEnd: string;
+  description: string;
 };
 
 export type Education = {
@@ -20,7 +21,9 @@ export type Education = {
 export type Course = {
   id: string;
   institution: string;
-  year: string;
+  courseName: string;
+  yearStart: string;
+  yearEnd: string;
 };
 
 export type CVData = {

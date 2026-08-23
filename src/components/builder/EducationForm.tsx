@@ -34,17 +34,17 @@ export default function EducationForm({ data, updateData }: { data: CVData, upda
               <Trash2 size={18} strokeWidth={2} />
             </button>
             <div className={styles.formGroup}>
-              <label>Nama Sekolah / Universitas</label>
-              <input className={styles.input} value={edu.school} onChange={e => handleChange(edu.id, 'school', e.target.value)} placeholder="Contoh: SMK Negeri 1 Cikarang" />
+              <label>Nama Sekolah / Universitas&nbsp;<span style={{ color: 'red' }}>*</span></label>
+              <input className={styles.input} value={edu.school} onChange={e => handleChange(edu.id, 'school', e.target.value)} placeholder="Contoh: Universitas Indonesia" />
             </div>
             <div className={styles.grid2}>
               <div className={styles.formGroup}>
-                <label>Jurusan</label>
-                <input className={styles.input} value={edu.major} onChange={e => handleChange(edu.id, 'major', e.target.value)} placeholder="Contoh: Administrasi Perkantoran" />
+                <label>Jurusan&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                <input className={styles.input} value={edu.major} onChange={e => handleChange(edu.id, 'major', e.target.value)} placeholder="Contoh: Ilmu Komputer (Tulis - jika tidak ada)" />
               </div>
               <div className={styles.formGroup}>
-                <label>Tahun Lulus</label>
-                <input className={styles.input} value={edu.graduationYear} onChange={e => handleChange(edu.id, 'graduationYear', e.target.value)} placeholder="Contoh: 2018" />
+                <label>Bulan & Tahun Lulus&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                <input className={styles.input} value={edu.graduationYear} onChange={e => handleChange(edu.id, 'graduationYear', e.target.value)} placeholder="Contoh: Agustus 2023" />
               </div>
             </div>
           </div>
