@@ -42,7 +42,7 @@ export default function SkillsForm({ data, updateData }: { data: CVData, updateD
               </div>
               <div className={styles.formGroup}>
                 <label>Nama Lembaga</label>
-                <input className={styles.input} value={course.institution} onChange={e => handleCourseChange(course.id, 'institution', e.target.value)} placeholder="Contoh: LPK Wikara" />
+                <input className={styles.input} value={course.institution} onChange={e => handleCourseChange(course.id, 'institution', e.target.value)} placeholder="Contoh: LKP WIKARA" />
               </div>
               <div className={styles.grid2}>
                 <div className={styles.formGroup}>
