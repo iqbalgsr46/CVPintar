@@ -4,6 +4,7 @@ import styles from "./home.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ScrollContext } from "@/app/page";
+import Link from "next/link";
 
 export default function FeatureSection() {
   const router = useRouter();
@@ -78,9 +79,11 @@ export default function FeatureSection() {
         viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <button className={styles.primaryBtn} onClick={() => router.push("/builder")}>
-          Buktikan Sendiri
-        </button>
+        <Link href="/builder" style={{ textDecoration: 'none' }}>
+          <button className={styles.primaryBtn}>
+            Buktikan Sendiri
+          </button>
+        </Link>
       </motion.div>
 
       <div className={styles.scrollIndicator}>

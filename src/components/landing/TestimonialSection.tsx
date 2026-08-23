@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ScrollContext } from "@/app/page";
 import { ClientTweetCard } from "@/components/ui/client-tweet-card";
+import Link from "next/link";
 
 export default function TestimonialSection() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function TestimonialSection() {
         viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className={missionStyles.title} style={{ fontSize: '1.8rem' }}>Ada yang bisa dibantu?</h1>
+        <h2 className={missionStyles.title} style={{ fontSize: '1.8rem' }}>Ada yang bisa dibantu?</h2>
         <p className={missionStyles.subtitle}>
           Jangan sungkan menyapa, aku di sini siap ngebantu proses pembuatan CV-mu.
         </p>
@@ -71,9 +72,15 @@ export default function TestimonialSection() {
         </div>
         
         <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', width: '100%' }}>
-            <button className={missionStyles.ctaBtn} onClick={() => window.open("https://wa.me/6287728382093", "_blank")}>
-            Chat Lewat WhatsApp
-            </button>
+            <a 
+              href="https://wa.me/6287728382093" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={missionStyles.ctaBtn}
+              style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center', boxSizing: 'border-box' }}
+            >
+              Chat Lewat WhatsApp
+            </a>
         </div>
       </motion.section>
 
@@ -91,9 +98,9 @@ export default function TestimonialSection() {
         gap: '0.5rem'
       }}>
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.2rem' }}>
-          <a href="#" style={{ textDecoration: 'none', color: '#9ca3af', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#9ca3af'}>Syarat & Ketentuan</a>
+          <Link href="/syarat-ketentuan" style={{ textDecoration: 'none', color: '#9ca3af', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#9ca3af'}>Syarat & Ketentuan</Link>
           <span>•</span>
-          <a href="#" style={{ textDecoration: 'none', color: '#9ca3af', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#9ca3af'}>Kebijakan Privasi</a>
+          <Link href="/kebijakan-privasi" style={{ textDecoration: 'none', color: '#9ca3af', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = '#9ca3af'}>Kebijakan Privasi</Link>
         </div>
         <p style={{ margin: 0 }}>© {new Date().getFullYear()} CVPintar. Hak Cipta Dilindungi.</p>
       </footer>

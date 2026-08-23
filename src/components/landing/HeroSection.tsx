@@ -5,6 +5,7 @@ import styles from "./splash.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ScrollContext } from "@/app/page";
+import Link from "next/link";
 
 const PHRASES = [
   "Buat CV profesional dalam 2 menit dengan AI...",
@@ -94,15 +95,17 @@ export default function HeroSection() {
         <h1 className={styles.title}>Bikin CV Pro<br />Secara Otomatis!</h1>
         <p className={styles.subtitle}>Stop pusing mikirin format! Biar AI kami<br />yang merangkai CV-mu.</p>
         
-        <div className={styles.promptBox} onClick={handleStart}>
-          <div className={styles.promptText}>
-            {text}
-            <span className={styles.promptCursor}></span>
+        <Link href="/builder" style={{ textDecoration: 'none' }}>
+          <div className={styles.promptBox}>
+            <div className={styles.promptText}>
+              {text}
+              <span className={styles.promptCursor}></span>
+            </div>
+            <button className={styles.orderBtn}>
+              Mulai Buat CV
+            </button>
           </div>
-          <button className={styles.orderBtn}>
-            Mulai Buat CV
-          </button>
-        </div>
+        </Link>
 
         <div className={styles.scrollIndicator}>
           <span>Scroll ke Bawah</span>

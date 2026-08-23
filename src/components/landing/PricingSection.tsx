@@ -3,6 +3,7 @@ import missionStyles from "./mission.module.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ScrollContext } from "@/app/page";
+import Link from "next/link";
 
 export default function PricingSection() {
   const router = useRouter();
@@ -38,9 +39,9 @@ export default function PricingSection() {
         viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <h1 className={missionStyles.title}>
+        <h2 className={missionStyles.title}>
           Cara Kerja <span className={missionStyles.titleHighlight}>AI</span>
-        </h1>
+        </h2>
         <p className={missionStyles.subtitle}>
           Hanya butuh 3 menit. Dapatkan CV profesional tanpa pusing memikirkan kalimat dan desain.
         </p>
@@ -55,7 +56,7 @@ export default function PricingSection() {
         <div className={missionStyles.stepBox}>
           <div className={missionStyles.stepNumber}>1</div>
           <div className={missionStyles.stepText}>
-            <h4>Ceritakan Dirimu</h4>
+            <h3>Ceritakan Dirimu</h3>
             <p>Isi form singkat atau biarkan AI mewawancaraimu.</p>
           </div>
         </div>
@@ -63,7 +64,7 @@ export default function PricingSection() {
         <div className={missionStyles.stepBox}>
           <div className={missionStyles.stepNumber}>2</div>
           <div className={missionStyles.stepText}>
-            <h4>AI Merakit CV</h4>
+            <h3>AI Merakit CV</h3>
             <p>Sistem kami akan menyusun kata kunci ATS secara otomatis.</p>
           </div>
         </div>
@@ -71,21 +72,22 @@ export default function PricingSection() {
         <div className={missionStyles.stepBox}>
           <div className={missionStyles.stepNumber}>3</div>
           <div className={missionStyles.stepText}>
-            <h4>Preview & Unduh</h4>
+            <h3>Preview & Unduh</h3>
             <p>Lihat hasilnya gratis. Bayar hanya jika Anda puas.</p>
           </div>
         </div>
       </motion.div>
 
-      <motion.button 
-        className={missionStyles.ctaBtn} 
-        onClick={() => router.push("/builder")}
-        initial={{ opacity: 0, y: 30 }}
-        viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        Buat CV Sekarang
-      </motion.button>
+      <Link href="/builder" style={{ textDecoration: 'none' }}>
+        <motion.button 
+          className={missionStyles.ctaBtn} 
+          initial={{ opacity: 0, y: 30 }}
+          viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          Buat CV Sekarang
+        </motion.button>
+      </Link>
 
       <div className={missionStyles.scrollIndicator}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

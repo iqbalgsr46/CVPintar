@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +23,12 @@ export default function Navbar() {
         background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
         backdropFilter: isOpen ? 'none' : 'blur(2px)'
       }}>
-        <div style={{ zIndex: 60, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => window.location.href = '/'}>
-          <img src="/images/logo-cvpintar.png" alt="CVPintar Logo" style={{ height: '32px', width: 'auto' }} />
-          <span style={{ fontWeight: '800', fontSize: '1.25rem', color: '#fff', letterSpacing: '-0.02em' }}>CVPintar</span>
-        </div>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <div style={{ zIndex: 60, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <Image src="/images/logo-cvpintar.png" alt="CVPintar Logo" width={32} height={32} style={{ height: '32px', width: 'auto' }} />
+            <span style={{ fontWeight: '800', fontSize: '1.25rem', color: '#fff', letterSpacing: '-0.02em' }}>CVPintar</span>
+          </div>
+        </Link>
         
         <button 
           onClick={() => setIsOpen(!isOpen)}
@@ -86,25 +90,23 @@ export default function Navbar() {
             <a href="#bantuan" onClick={() => setIsOpen(false)} style={{ color: '#fff', fontSize: '1.5rem', textDecoration: 'none', fontWeight: '500' }}>Bantuan</a>
           </div>
             
-            <button 
-              onClick={() => {
-                setIsOpen(false);
-                window.location.href = '/builder';
-              }}
-              style={{
-                marginTop: '1rem',
-                background: '#8b5cf6',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '100px',
-                padding: '1rem 2rem',
-                fontSize: '1.1rem',
-                fontWeight: 'bold',
-                cursor: 'pointer'
-              }}
-            >
-              Mulai Buat CV
-            </button>
+            <Link href="/builder" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none' }}>
+              <button 
+                style={{
+                  marginTop: '1rem',
+                  background: '#8b5cf6',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '100px',
+                  padding: '1rem 2rem',
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  cursor: 'pointer'
+                }}
+              >
+                Mulai Buat CV
+              </button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
