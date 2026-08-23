@@ -12,14 +12,13 @@ export default function HelloSplashScreen({ onComplete }: { onComplete: () => vo
     return () => clearTimeout(timer);
   }, [onComplete]);
 
-  // Framer motion variants for the path drawing
-  const pathVariants = {
+  const pathVariants: any = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: {
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { duration: 2.2, ease: "easeInOut" },
+        pathLength: { duration: 2.2, ease: [0.45, 0, 0.15, 1] },
         opacity: { duration: 0.1 }
       }
     }
