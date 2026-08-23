@@ -36,13 +36,18 @@
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .previewBtn:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.previewBtn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .content {
@@ -54,8 +59,9 @@
 }
 
 .header {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   text-align: center;
+  position: relative;
 }
 
 .title {
@@ -109,11 +115,9 @@
 
 .formGroup label {
   display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
   color: #64748b;
 }
 
@@ -254,7 +258,7 @@ textarea.input {
     margin-bottom: 1.2rem;
   }
   .formGroup label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin-bottom: 0.5rem;
   }
   .input {

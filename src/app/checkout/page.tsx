@@ -8,8 +8,7 @@ import styles from './checkout.module.css';
 export default function CheckoutPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  const [status, setStatus] = useState<'idle' | 'uploading' | 'verifying' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'verifying' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleUploadClick = () => {
@@ -36,10 +35,7 @@ export default function CheckoutPage() {
 
       if (data.isValid) {
         setStatus('success');
-        // Cookie ter-enkripsi sudah di-set otomatis oleh server
-        setTimeout(() => {
-          router.push('/preview');
-        }, 2000);
+        localStorage.setItem('cvpintar_paid', 'true');
       } else {
         setStatus('error');
         setErrorMessage(data.reason || 'Gambar tidak valid.');
@@ -52,135 +48,171 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <motion.div 
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <motion.div 
         className={styles.checkoutBox}
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.1, type: 'spring', stiffness: 100 }}
       >
         <AnimatePresence mode="wait">
-          {status !== 'success' ? (
+          {status === 'idle' && (
             <motion.div
               key="form"
+              className={styles.formContainer}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
             >
-              <div className={styles.header}>
-                <h1>Pembayaran Premium</h1>
-                <p>Hapus watermark & unduh CV tanpa batas.</p>
-              </div>
-
-              <div className={styles.orderSummary}>
-                <div className={styles.summaryRow}>
-                  <span style={{ color: '#a1a1aa' }}>Layanan</span>
-                  <span style={{ fontWeight: 500 }}>Hapus Watermark</span>
+              <div className={styles.topBar}>
+                <div className={styles.brand}>
+                  <img src="/images/logo-cvpintar.png" alt="Logo" style={{ height: '28px', width: 'auto' }} />
+                  CVPintar
                 </div>
-                <div className={styles.summaryDivider}></div>
-                <div className={styles.summaryRow}>
-                  <span style={{ color: '#a1a1aa' }}>Total Tagihan</span>
-                  <span style={{ fontWeight: 700, fontSize: '1.2rem', color: '#c084fc' }}>Rp 10.000</span>
-                </div>
-              </div>
-
-              <div className={styles.stepsContainer}>
-                <div className={styles.stepBox}>
-                  <div className={styles.stepHeader}>
-                    <span className={styles.stepNumber}>1</span>
-                    <span className={styles.stepTitle}>Scan & Bayar</span>
-                  </div>
-                  
-                  <div className={styles.qrisWrapper}>
-                    <img src="/QRIS-CV-AI.jpeg" alt="QRIS DevTech AI Store" style={{ width: '160px', borderRadius: '8px', display: 'block', marginBottom: '0.75rem' }} />
-                    <a 
-                      href="/QRIS-CV-AI.jpeg" 
-                      download="QRIS-CVPintar.jpeg"
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.5rem', background: '#f3e8ff', color: '#8b5cf6', borderRadius: '8px', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, width: '100%', justifyContent: 'center', transition: 'all 0.2s' }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                      Simpan QRIS
-                    </a>
-                  </div>
-                  
-                  <div style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: '#a1a1aa' }}>
-                    Otomatis terisi <strong style={{color:'#fff'}}>Rp 10.000</strong>
-                  </div>
-                </div>
-
-                <div className={styles.stepBox}>
-                  <div className={styles.stepHeader}>
-                    <span className={styles.stepNumber}>2</span>
-                    <span className={styles.stepTitle}>Verifikasi Otomatis</span>
-                  </div>
-                  
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    ref={fileInputRef} 
-                    style={{ display: 'none' }} 
-                    onChange={handleFileChange}
-                  />
-                  
-                  {status === 'error' && (
-                    <div className={styles.errorBox}>
-                      <strong>Verifikasi Gagal:</strong><br/>{errorMessage}
-                    </div>
-                  )}
-
-                  <div 
-                    className={styles.uploadArea} 
-                    onClick={handleUploadClick}
-                    style={{ pointerEvents: status === 'verifying' ? 'none' : 'auto', opacity: status === 'verifying' ? 0.7 : 1 }}
-                  >
-                    {status === 'verifying' ? (
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', padding: '0.5rem 0' }}>
-                        <div className={styles.spinner}></div>
-                        <span style={{ color: '#c084fc', fontSize: '0.9rem', fontWeight: 500 }}>Mengecek Struk...</span>
-                      </div>
-                    ) : (
-                      <>
-                        <div style={{ color: '#c084fc', marginBottom: '0.25rem' }}>
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                        </div>
-                        <div style={{ fontWeight: 500, color: '#fff', fontSize: '0.95rem' }}>Upload Bukti Transfer</div>
-                        <div style={{ fontSize: '0.8rem', color: '#a1a1aa' }}>Format JPG/PNG</div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem' }}>
-                <button 
-                  onClick={() => router.back()}
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.25rem', background: 'rgba(255, 255, 255, 0.05)', color: '#d4d4d8', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '20px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 500, transition: 'all 0.2s' }}
-                  onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#fff'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.color = '#d4d4d8'; }}
-                >
-                  Kembali
+                <button className={styles.cancelBtn} onClick={() => router.push('/preview')}>
+                  Batal
                 </button>
               </div>
+
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div className={styles.qrisSection}>
+                  <img src="/CV-PINTAR-QRIS-NEW.jpeg" alt="QRIS" className={styles.qrisImage} />
+                  <div style={{ marginTop: '0.5rem', color: '#71717a', fontSize: '0.8rem', textAlign: 'center' }}>
+                    *Mohon input nominal <strong>Rp 10.000</strong> secara manual
+                  </div>
+                </div>
+
+                <div className={styles.divider} />
+
+                <div className={styles.amountSection}>
+                  <div className={styles.amountLeft}>
+                    <span className={styles.amountLabel}>Total Tagihan</span>
+                    <span className={styles.amountValue}>Rp10.000</span>
+                  </div>
+                  <div className={styles.amountRight}>
+                    IDR
+                  </div>
+                </div>
+
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  ref={fileInputRef} 
+                  style={{ display: 'none' }} 
+                  onChange={handleFileChange}
+                />
+
+                <button 
+                  className={styles.mainActionBtn} 
+                  onClick={handleUploadClick}
+                >
+                  Upload Bukti Transfer
+                </button>
+
+                <div className={styles.footerLinks}>
+                  <a href="/CV-PINTAR-QRIS-NEW.jpeg" download="QRIS-CVPintar.jpeg" className={styles.footerLink}>
+                    Simpan QRIS
+                  </a>
+                  <span style={{ color: '#d4d4d8' }}>/</span>
+                  <button onClick={() => router.push('/builder')} className={styles.footerLink}>
+                    Kembali ke Edit
+                  </button>
+                </div>
+              </div>
             </motion.div>
-          ) : (
+          )}
+
+          {status === 'verifying' && (
+            <motion.div
+              key="verifying"
+              className={styles.statusState}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              style={{ justifyContent: 'center' }}
+            >
+              <div style={{ marginBottom: '2rem' }}>
+                <svg className={styles.flyingPlane} width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Speed lines */}
+                  <line className={styles.speedLine} x1="22" y1="62" x2="33" y2="55" stroke="#6ee7b7" strokeWidth="2.5" strokeLinecap="round" />
+                  <line className={styles.speedLine2} x1="18" y1="75" x2="32" y2="66" stroke="#111827" strokeWidth="3" strokeLinecap="round" />
+                  <line className={styles.speedLine3} x1="34" y1="84" x2="44" y2="77" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" />
+                  
+                  {/* Plane Body */}
+                  <polygon points="15,45 90,30 45,52" fill="#059669" />
+                  <polygon points="45,52 90,30 75,75" fill="#10b981" />
+                  <polygon points="45,52 42,75 60,63" fill="#022c22" />
+                </svg>
+              </div>
+              <h2 className={styles.statusTitle}>Memproses...</h2>
+              <p className={styles.statusDesc}>Transfer Anda sedang diproses</p>
+            </motion.div>
+          )}
+
+          {status === 'success' && (
             <motion.div
               key="success"
-              className={styles.successState}
+              className={styles.statusState}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: 'spring', damping: 15 }}
+              style={{ justifyContent: 'center' }}
             >
-              <div className={styles.checkIcon}>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
+              <div style={{ marginBottom: '2rem', filter: 'drop-shadow(3px 4px 0px rgba(0,0,0,0.85))' }}>
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Outer Scalloped Badge */}
+                  <path d="M50,4 C57.5,4 61.5,10.5 68.5,12 C76,13.5 81.5,19 83,26.5 C84.5,33.5 91,37.5 91,45 C91,52.5 84.5,56.5 83,63.5 C81.5,71 76,76.5 68.5,78 C61.5,79.5 57.5,86 50,86 C42.5,86 38.5,79.5 31.5,78 C24,76.5 18.5,71 17,63.5 C15.5,56.5 9,52.5 9,45 C9,37.5 15.5,33.5 17,26.5 C18.5,19 24,13.5 31.5,12 C38.5,10.5 42.5,4 50,4 Z" fill="#0ea5e9" style={{ fill: '#16a34a' }} />
+                  {/* Inner Checkmark */}
+                  <path d="M35 48 L46 60 L68 35" stroke="white" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h2 style={{ marginBottom: '0.5rem' }}>Verifikasi Berhasil!</h2>
-              <p style={{ color: '#a1a1aa' }}>Terima kasih. Membuka kunci CV Premium Anda...</p>
+              <h2 className={styles.statusTitle} style={{ marginBottom: '0.5rem' }}>Berhasil!</h2>
+              <p className={styles.statusDesc} style={{ marginBottom: '2rem' }}>Pembayaran berhasil dikonfirmasi</p>
+              <button 
+                className={styles.mainActionBtn}
+                style={{ width: 'auto', padding: '0.8rem 2.5rem', borderRadius: '30px' }}
+                onClick={() => router.push('/preview')}
+              >
+                Lanjutkan
+              </button>
+            </motion.div>
+          )}
+
+          {status === 'error' && (
+            <motion.div
+              key="error"
+              className={styles.statusState}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', damping: 15 }}
+              style={{ justifyContent: 'center' }}
+            >
+              <div style={{ marginBottom: '2rem' }}>
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" fill="#f43f5e" />
+                  <path d="M35 35 L65 65 M65 35 L35 65" stroke="white" strokeWidth="10" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h2 className={styles.statusTitle} style={{ marginBottom: '0.5rem' }}>Gagal</h2>
+              <p className={styles.statusDesc} style={{ marginBottom: '2rem', maxWidth: '300px' }}>
+                {errorMessage || 'Gambar ini sudah pernah digunakan. Silakan lakukan pembayaran baru dan upload bukti transfer yang baru.'}
+              </p>
+              <button 
+                className={styles.mainActionBtn}
+                style={{ width: 'auto', padding: '0.8rem 2.5rem', borderRadius: '30px' }}
+                onClick={() => setStatus('idle')}
+              >
+                Coba Lagi
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

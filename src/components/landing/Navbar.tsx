@@ -21,8 +21,9 @@ export default function Navbar() {
         background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
         backdropFilter: isOpen ? 'none' : 'blur(2px)'
       }}>
-        <div style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff', zIndex: 60 }}>
-          CVPintar
+        <div style={{ zIndex: 60, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => window.location.href = '/'}>
+          <img src="/images/logo-cvpintar.png" alt="CVPintar Logo" style={{ height: '32px', width: 'auto' }} />
+          <span style={{ fontWeight: '800', fontSize: '1.25rem', color: '#fff', letterSpacing: '-0.02em' }}>CVPintar</span>
         </div>
         
         <button 

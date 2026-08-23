@@ -9,6 +9,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "GEMINI_API_KEY belum di-set di file .env" }, { status: 500 });
     }
 
+    // Extract photo so we don't send huge base64 strings to Gemini
+    const userPhoto = rawData.personal?.photo;
+    if (rawData.personal && rawData.personal.photo) {
+      delete rawData.personal.photo;
+    }
+
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const prompt = `Anda adalah konsultan HRD senior, ahli penulisan CV, dan pakar ATS (Applicant Tracking System) di Indonesia dengan pengalaman 15 tahun.
@@ -147,6 +153,10 @@ ${JSON.stringify(rawData)}`;
           
           const polishedData = JSON.parse(cleanJsonText);
 
+          if (userPhoto && polishedData.personal) {
+            polishedData.personal.photo = userPhoto;
+          }
+
           return NextResponse.json(polishedData);
 
         } catch (error: unknown) {
@@ -176,6 +186,9 @@ ${JSON.stringify(rawData)}`;
 
     // All models failed - return the raw data back so the user still gets their CV
     console.error("All AI models failed. Returning raw data as fallback. Last error:", lastError);
+    if (userPhoto && rawData.personal) {
+      rawData.personal.photo = userPhoto;
+    }
     return NextResponse.json(rawData);
 
   } catch (error) {

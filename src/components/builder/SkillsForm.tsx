@@ -77,6 +77,7 @@ export default function SkillsForm({ data, updateData }: { data: CVData, updateD
             value={data.skills} 
             onChange={(e) => updateData({ ...data, skills: e.target.value })} 
             placeholder="Contoh: Microsoft Excel, Administrasi, Data Entry" 
+            rows={4}
           />
         </div>
       </div>

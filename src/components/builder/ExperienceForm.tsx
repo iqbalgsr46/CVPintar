@@ -30,10 +30,16 @@ export default function ExperienceForm({ data, updateData }: { data: CVData, upd
       <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', padding: '1rem', marginBottom: '1.5rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
         <Lightbulb color="#0284c7" size={24} style={{ flexShrink: 0 }} />
         <div>
-          <h4 style={{ color: '#0369a1', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.25rem' }}>Tips Fresh Graduate</h4>
-          <p style={{ color: '#0c4a6e', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>
-            Belum punya pengalaman kerja? Jangan dikosongkan! Masukkan pengalaman <b>Magang / PKL</b>, <b>Organisasi Kampus/Sekolah</b>, atau <b>Proyek Akhir (Skripsi/Tugas Akhir)</b> Anda di sini. AI kami akan menyulapnya menjadi pengalaman profesional yang memukau HRD!
-          </p>
+          <h4 style={{ color: '#0369a1', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.35rem' }}>Tips Fresh Graduate</h4>
+          <div style={{ color: '#0c4a6e', fontSize: '0.85rem', lineHeight: 1.6 }}>
+            Belum punya pengalaman kerja? Jangan dikosongkan! Kamu bisa memasukkan:
+            <ul style={{ margin: '0.35rem 0', paddingLeft: '1.25rem', color: '#0369a1', fontWeight: 500 }}>
+              <li>Magang / PKL</li>
+              <li>Organisasi Sekolah / Kampus</li>
+              <li>Tugas Akhir / Skripsi</li>
+            </ul>
+            Biar AI kami yang menyulapnya jadi pengalaman profesional yang memukau HRD!
+          </div>
         </div>
       </div>
       
@@ -62,7 +68,10 @@ export default function ExperienceForm({ data, updateData }: { data: CVData, upd
               </div>
             </div>
             <div className={styles.formGroup}>
-              <label>Ceritakan Singkat Tugasmu <span style={{ color: '#8b5cf6', fontSize: '0.75rem' }}>(Opsional, tapi sangat membantu AI)</span></label>
+              <label>
+                Ceritakan singkat tugasmu 
+                <span style={{ color: '#8b5cf6', marginLeft: '4px' }}>(Opsional, tapi sangat membantu AI)</span>
+              </label>
               <textarea 
                 className={styles.input} 
                 value={exp.description || ''} 

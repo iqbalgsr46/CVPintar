@@ -43,24 +43,6 @@ export default function PreviewPage() {
     });
   };
 
-  const handleDownloadWord = () => {
-    if (!isPaid) return router.push('/checkout');
-    
-    const cvWrapper = document.getElementById('cv-export-wrapper');
-    if (!cvWrapper) return;
-
-    const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>CV Premium</title></head><body>";
-    const footer = "</body></html>";
-    const sourceHTML = header + cvWrapper.innerHTML + footer;
-    
-    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
-    const fileDownload = document.createElement("a");
-    document.body.appendChild(fileDownload);
-    fileDownload.href = source;
-    fileDownload.download = 'CVPintar_Premium.doc';
-    fileDownload.click();
-    document.body.removeChild(fileDownload);
-  };
 
   return (
     <div className={styles.container}>
@@ -78,14 +60,6 @@ export default function PreviewPage() {
           
           {isPaid ? (
             <div style={{ display: 'flex', gap: '0.5rem', flex: 1 }}>
-              <button className={`${styles.payBtn} ${styles.btnWord}`} onClick={handleDownloadWord}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="currentColor" fillOpacity="0.2"/>
-                  <path d="M14 2v6h6l-6-6z" fill="currentColor" fillOpacity="0.4"/>
-                  <path d="M7 12.5l1.5 5 1.5-3.5 1.5 3.5 1.5-5H11.5l-1 3.5-1.5-3.5h-1l-1.5 3.5-1-3.5H7z" fill="currentColor"/>
-                </svg>
-                Word (.doc)
-              </button>
               <button className={`${styles.payBtn} ${styles.btnPdf}`} onClick={handleDownloadPDF}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="currentColor" fillOpacity="0.2"/>

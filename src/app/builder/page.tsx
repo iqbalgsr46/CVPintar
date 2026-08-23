@@ -105,17 +105,33 @@ export default function BuilderPage() {
         initial="hidden"
         animate="show"
       >
-        <motion.div className={styles.header} variants={itemVariants}>
+        <motion.div variants={itemVariants} style={{ display: 'flex', width: '100%', justifyContent: 'flex-start', marginBottom: '1rem' }}>
           <button 
             onClick={() => router.push('/')}
-            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.25rem', background: '#f4f4f5', color: '#52525b', border: 'none', borderRadius: '20px', cursor: 'pointer', fontSize: '0.85rem', marginBottom: '1.5rem', fontWeight: 600, transition: 'all 0.2s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.25rem', background: '#f4f4f5', color: '#52525b', border: 'none', borderRadius: '20px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, transition: 'all 0.2s' }}
             onMouseOver={(e) => { e.currentTarget.style.background = '#e4e4e7'; e.currentTarget.style.color = '#18181b'; }}
             onMouseOut={(e) => { e.currentTarget.style.background = '#f4f4f5'; e.currentTarget.style.color = '#52525b'; }}
           >
             Kembali
           </button>
-          <h1 className={styles.title}>Isi Data Anda</h1>
-          <p className={styles.subtitle}>Cukup lengkapi data di bawah, AI kami yang akan menyusun CV profesional untuk Anda.</p>
+        </motion.div>
+
+        <motion.div variants={itemVariants} style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 0, marginTop: '1rem' }}>
+          <img 
+            src="/images/animasi-halaman-form.png" 
+            alt="AI Assistant Form" 
+            style={{ 
+              width: '100%', 
+              maxWidth: '300px', 
+              height: 'auto', 
+              objectFit: 'contain'
+            }} 
+          />
+        </motion.div>
+
+        <motion.div className={styles.section} variants={itemVariants} style={{ marginTop: '-4rem', position: 'relative', zIndex: 10, textAlign: 'center', paddingTop: '3rem', paddingBottom: '2rem' }}>
+          <h1 className={styles.title} style={{ marginBottom: '0.5rem' }}>Yuk, Lengkapi Datamu!</h1>
+          <p className={styles.subtitle} style={{ margin: '0 auto' }}>Tinggal isi aja formulir di bawah ini, dan biarkan AI kami yang merangkainya jadi CV profesional buat kamu.</p>
         </motion.div>
 
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as any, stiffness: 300, damping: 24 } } }}>

@@ -32,6 +32,7 @@ export type CVData = {
     phone: string;
     email: string;
     address: string;
+    photo?: string;
   };
   education: Education[];
   courses: Course[];
@@ -45,6 +46,7 @@ const defaultCVData: CVData = {
     phone: '',
     email: '',
     address: '',
+    photo: '',
   },
   education: [],
   courses: [],

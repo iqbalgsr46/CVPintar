@@ -17,9 +17,9 @@ export default function TestimonialSection() {
         viewport={{ root: scrollRef, once: true, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className={missionStyles.title} style={{ fontSize: '1.8rem' }}>Butuh Bantuan?</h1>
+        <h1 className={missionStyles.title} style={{ fontSize: '1.8rem' }}>Ada yang bisa dibantu?</h1>
         <p className={missionStyles.subtitle}>
-          Tim Customer Service kami siap mendampingi Anda jika ada kesulitan.
+          Jangan sungkan menyapa, aku di sini siap ngebantu proses pembuatan CV-mu.
         </p>
       </motion.section>
 
@@ -32,13 +32,13 @@ export default function TestimonialSection() {
       >
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <div style={{
-            background: '#000',
-            border: '1px solid #333',
+            background: '#ffffff',
+            border: '1px solid #e5e7eb',
             borderRadius: '16px',
             padding: '1.2rem',
             maxWidth: '400px',
             width: '100%',
-            color: '#fff',
+            color: '#111827',
             fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
           }}>
             {/* Header */}
@@ -59,20 +59,20 @@ export default function TestimonialSection() {
                     </g>
                   </svg>
                 </div>
-                <span style={{ color: '#71767b', fontSize: '0.9rem', marginTop: '-2px' }}>@cvpintar</span>
+                <span style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '-2px' }}>@cvpintar</span>
               </div>
             </div>
             
             {/* Body */}
-            <p style={{ fontSize: '1rem', lineHeight: 1.5, margin: 0, color: '#e7e9ea' }}>
-              Halo! Punya pertanyaan atau kendala? Jangan ragu hubungi kami. Kami siap membantu Anda sampai tuntas. 💬✨
+            <p style={{ fontSize: '1rem', lineHeight: 1.5, margin: 0, color: '#374151' }}>
+              Halo! 👋 Kalau ada pertanyaan atau butuh bantuan saat bikin CV, langsung chat aku aja ya. Aku dengan senang hati bakal bantu kamu sampai beres! 💬 ✨
             </p>
           </div>
         </div>
         
         <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', width: '100%' }}>
             <button className={missionStyles.ctaBtn} onClick={() => window.open("https://wa.me/6287728382093", "_blank")}>
-            Hubungi CS Sekarang
+            Chat Lewat WhatsApp
             </button>
         </div>
       </motion.section>

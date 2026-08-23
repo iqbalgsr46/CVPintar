@@ -5,6 +5,10 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, system-ui, sans-serif;
   display: flex;
   flex-direction: column;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .bottomBar {
@@ -39,14 +43,14 @@
 }
 
 .backBtn {
-  background: rgba(255,255,255,0.05);
-  border: none;
-  color: #a1a1aa;
-  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.02);
+  color: #d4d4d8;
+  padding: 0.8rem 1.2rem;
   border-radius: 100px;
   cursor: pointer;
-  transition: all 0.2s;
-  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 600;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -54,30 +58,33 @@
   font-size: 0.9rem;
 }
 .backBtn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   color: #fff;
+  transform: scale(1.05);
 }
 
 .payBtn {
   flex: 1;
-  background: #8b5cf6;
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
   color: #fff;
   border: none;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 100px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  transition: all 0.3s;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 }
 .payBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25);
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+  background: linear-gradient(135deg, #b066f8 0%, #8b5cf6 100%);
 }
 
 .canvasWrapper {

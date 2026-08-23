@@ -32,11 +32,16 @@ export default function CVTemplate({ data = {} as any, isPaid = false }: { data:
       title: '',
       element: (
         <>
-          <div className={styles.cvHeader}>
-            <div className={styles.cvName}>{personal.fullName || 'NAMA LENGKAP'}</div>
-            <div className={styles.cvContact}>
-              {[personal.address, personal.phone, personal.email].filter(Boolean).join('  |  ')}
+          <div className={styles.cvHeader} style={{ display: personal.photo ? 'flex' : 'block', alignItems: 'center', justifyContent: 'space-between', textAlign: personal.photo ? 'left' : 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className={styles.cvName} style={{ marginBottom: personal.photo ? '0.5cqw' : '' }}>{personal.fullName || 'NAMA LENGKAP'}</div>
+              <div className={styles.cvContact}>
+                {[personal.address, personal.phone, personal.email].filter(Boolean).join('  |  ')}
+              </div>
             </div>
+            {personal.photo && (
+              <img src={personal.photo} alt="Photo" style={{ width: '12cqw', height: '12cqw', borderRadius: '50%', objectFit: 'cover', flexShrink: 0, marginLeft: '3cqw' }} />
+            )}
           </div>
           <div className={styles.cvDivider}></div>
         </>

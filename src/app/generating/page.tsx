@@ -6,11 +6,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './generating.module.css';
 
 const loadingTexts = [
-  "Menganalisis profil Anda...",
-  "Merangkai kalimat profesional...",
-  "Menyesuaikan format standar HRD...",
-  "Menata tata letak CV Anda...",
-  "Membuat sentuhan akhir..."
+  "Menganalisis data profil dan pengalaman Anda...",
+  "Mengekstraksi kata kunci untuk optimasi ATS...",
+  "Menyusun tata bahasa dan diksi profesional...",
+  "Menerapkan struktur CV berstandar industri...",
+  "Melakukan finalisasi tata letak akhir..."
 ];
 
 export default function GeneratingPage() {
@@ -19,10 +19,10 @@ export default function GeneratingPage() {
   const calledApi = useRef(false);
 
   useEffect(() => {
-    // Cycle loading texts every 2.5 seconds for a smoother read
+    // Cycle loading texts every 3 seconds
     const interval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % loadingTexts.length);
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -66,39 +66,50 @@ export default function GeneratingPage() {
   }, [router]);
 
   return (
-    <div className={styles.container}>
-      <motion.div 
-        className={styles.glowingOrb}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', damping: 10, stiffness: 50 }}
-      >
-        <div className={styles.core}></div>
-      </motion.div>
-
-      <div className={styles.statusText}>
-        <AnimatePresence mode="sync">
-          <motion.div
-            key={textIndex}
-            initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -15, filter: 'blur(4px)' }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            style={{ position: 'absolute', width: '100%' }}
-          >
-            {loadingTexts[textIndex]}
-          </motion.div>
-        </AnimatePresence>
+    <motion.div 
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <div className={styles.orbWrapper}>
+        <motion.div 
+          className={styles.glowingOrb}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', damping: 12, stiffness: 60, delay: 0.2 }}
+        >
+          <div className={styles.eye}></div>
+          <div className={styles.eye}></div>
+        </motion.div>
+        <motion.div 
+          className={styles.shadow}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        ></motion.div>
       </div>
-      
-      <motion.p 
-        className={styles.subText}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        Mohon tunggu, keajaiban sedang diproses...
-      </motion.p>
-    </div>
+
+      <div className={styles.statusContainer}>
+        <div className={styles.greeting}>
+          Halo! Saya <span className={styles.aiName}>CVPintar</span> 👋
+        </div>
+        <div className={styles.textCycler}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={textIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+              style={{ position: 'absolute', width: '100%' }}
+            >
+              {loadingTexts[textIndex]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </motion.div>
   );
 }
