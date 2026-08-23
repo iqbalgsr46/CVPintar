@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
       ATURAN VALIDASI MUTLAK (Semua harus terpenuhi):
       1. STATUS BERHASIL: Harus ada indikasi "Berhasil", "Success", atau "Sukses".
       2. NOMINAL TEPAT: HARUS tepat Rp 10.000.
-      3. TOKO TUJUAN: Penerima berhubungan dengan "DevTech AI Store" atau "DevTech" (opsional).
+      3. TOKO TUJUAN: Penerima WAJIB bernama "CVPINTAR, SOFTWARE" atau mengandung kata "CVPINTAR". Jika penerima atas nama orang pribadi atau toko lain, TOLAK.
       4. TANGGAL: Tanggal transaksi harus salah satu dari: ${allowedDates}. TOLAK struk yang lebih dari 1 hari yang lalu.
       5. KEASLIAN: BUKAN gambar editan, generator struk palsu, atau cropping mencurigakan.
 
