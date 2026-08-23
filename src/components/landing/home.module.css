@@ -5,7 +5,7 @@
   height: 100dvh;
   flex: 0 0 100dvh;
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
   overflow: hidden;
   display: flex;
   flex-direction: column;
