@@ -84,7 +84,7 @@ export default function PricingSection() {
           initial={{ opacity: 0, y: 30 }}
           viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          style={{ textDecoration: 'none', display: 'block', textAlign: 'center', boxSizing: 'border-box' }}
+          style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center', boxSizing: 'border-box', width: 'fit-content' }}
         >
           Buat CV Sekarang
         </motion.a>

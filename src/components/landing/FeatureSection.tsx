@@ -80,7 +80,7 @@ export default function FeatureSection() {
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <Link href="/builder" passHref legacyBehavior>
-          <a className={styles.primaryBtn} style={{ textDecoration: 'none', display: 'block', textAlign: 'center', boxSizing: 'border-box' }}>
+          <a className={styles.primaryBtn} style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center', boxSizing: 'border-box', width: 'fit-content' }}>
             Buktikan Sendiri
           </a>
         </Link>
