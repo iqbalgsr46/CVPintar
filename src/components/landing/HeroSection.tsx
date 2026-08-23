@@ -95,16 +95,16 @@ export default function HeroSection() {
         <h1 className={styles.title}>Bikin CV Pro<br />Secara Otomatis!</h1>
         <p className={styles.subtitle}>Stop pusing mikirin format! Biar AI kami<br />yang merangkai CV-mu.</p>
         
-        <Link href="/builder" style={{ textDecoration: 'none', display: 'contents' }}>
-          <div className={styles.promptBox}>
+        <Link href="/builder" passHref legacyBehavior>
+          <a className={styles.promptBox} style={{ textDecoration: 'none', display: 'flex' }}>
             <div className={styles.promptText}>
               {text}
               <span className={styles.promptCursor}></span>
             </div>
-            <button className={styles.orderBtn}>
+            <button className={styles.orderBtn} tabIndex={-1}>
               Mulai Buat CV
             </button>
-          </div>
+          </a>
         </Link>
 
         <div className={styles.scrollIndicator}>

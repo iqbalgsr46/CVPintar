@@ -79,10 +79,10 @@ export default function FeatureSection() {
         viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <Link href="/builder" style={{ textDecoration: 'none', display: 'contents' }}>
-          <button className={styles.primaryBtn}>
+        <Link href="/builder" passHref legacyBehavior>
+          <a className={styles.primaryBtn} style={{ textDecoration: 'none', display: 'block', textAlign: 'center', boxSizing: 'border-box' }}>
             Buktikan Sendiri
-          </button>
+          </a>
         </Link>
       </motion.div>
 

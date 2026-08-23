@@ -78,15 +78,16 @@ export default function PricingSection() {
         </div>
       </motion.div>
 
-      <Link href="/builder" style={{ textDecoration: 'none', display: 'contents' }}>
-        <motion.button 
+      <Link href="/builder" passHref legacyBehavior>
+        <motion.a 
           className={missionStyles.ctaBtn} 
           initial={{ opacity: 0, y: 30 }}
           viewport={{ root: scrollRef, once: false, margin: "-50px" }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
+          style={{ textDecoration: 'none', display: 'block', textAlign: 'center', boxSizing: 'border-box' }}
         >
           Buat CV Sekarang
-        </motion.button>
+        </motion.a>
       </Link>
 
       <div className={missionStyles.scrollIndicator}>
