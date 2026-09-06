@@ -218,7 +218,7 @@
   .collage { margin-bottom: 0.5rem !important; transform: scale(0.85); transform-origin: top center; height: 180px !important; }
   .cvMockup { padding: 0.8rem !important; margin-bottom: 0 !important; }
   .mainContainer { padding-top: 5rem !important; justify-content: flex-start !important; }
-  .actionContainer { margin-bottom: 4rem !important; }
+  .actionContainer { margin-bottom: 4.5rem !important; }
 }
 
 /* High-DPI phones (viewport 391-768px): scale proportionally so the 390px design doesn't shrink.
@@ -229,5 +229,6 @@
   .subtitle { font-size: calc(0.8rem + min(150px, (100vw - 390px)) * 0.0015) !important; max-width: calc(320px + min(150px, (100vw - 390px)) * 0.7); }
   .cvMockup { max-width: calc(280px + min(150px, (100vw - 390px)) * 0.6); padding: calc(0.8rem + min(150px, (100vw - 390px)) * 0.005) !important; }
   .primaryBtn { width: calc(320px + min(150px, (100vw - 390px)) * 0.5); padding: calc(1rem + min(150px, (100vw - 390px)) * 0.004) calc(2rem + min(150px, (100vw - 390px)) * 0.01); }
-  .scrollIndicator { bottom: calc(2rem + min(150px, (100vw - 390px)) * 0.01); }
+  .scrollIndicator { bottom: calc(0.5rem + min(150px, (100vw - 390px)) * 0.005); }
+  .actionContainer { margin-bottom: calc(4.5rem + min(150px, (100vw - 390px)) * 0.01) !important; }
 }
