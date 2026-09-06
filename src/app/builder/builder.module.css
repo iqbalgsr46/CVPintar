@@ -239,6 +239,12 @@ textarea.input {
   gap: 1.5rem;
 }
 
+.preferencesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 @media (max-width: 768px) {
   .grid2 {
     grid-template-columns: 1fr;
@@ -282,5 +288,9 @@ textarea.input {
 
   .content {
     padding-top: 2rem;
+  }
+  
+  .preferencesGrid {
+    grid-template-columns: 1fr !important;
   }
 }
