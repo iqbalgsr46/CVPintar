@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/logo-cvpintar.png",
-    apple: "/images/logo-cvpintar.png",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   openGraph: {
     title: "CVPintar - Buat CV ATS Friendly dengan AI",
