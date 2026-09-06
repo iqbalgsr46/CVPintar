@@ -176,7 +176,7 @@
 
 .scrollIndicator {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   color: #94a3b8;
