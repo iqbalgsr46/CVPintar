@@ -216,3 +216,17 @@
   .stepText p { font-size: 0.8rem; }
   .ctaBtn { padding: 1rem; font-size: 1rem; margin-bottom: 4rem !important; }
 }
+
+/* Wider phones (391-540px): scale up proportionally so content doesn't look small */
+@media (min-width: 391px) and (max-width: 540px) {
+  .container { padding-top: calc(5rem + (100vw - 390px) * 0.02); }
+  .blob { width: calc(110px + (100vw - 390px) * 0.3); height: calc(110px + (100vw - 390px) * 0.3); }
+  .title { font-size: calc(1.5rem + (100vw - 390px) * 0.004); }
+  .subtitle { font-size: calc(0.85rem + (100vw - 390px) * 0.0015); max-width: calc(320px + (100vw - 390px) * 0.7); }
+  .stepsContainer { max-width: calc(400px + (100vw - 390px) * 0.6); }
+  .stepBox { padding: calc(0.8rem + (100vw - 390px) * 0.005); }
+  .stepNumber { width: calc(28px + (100vw - 390px) * 0.05); height: calc(28px + (100vw - 390px) * 0.05); }
+  .stepText h4 { font-size: calc(0.95rem + (100vw - 390px) * 0.0015); }
+  .stepText p { font-size: calc(0.8rem + (100vw - 390px) * 0.001); }
+  .ctaBtn { max-width: calc(380px + (100vw - 390px) * 0.4); }
+}
