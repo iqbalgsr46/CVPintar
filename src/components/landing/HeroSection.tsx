@@ -8,9 +8,11 @@ import { ScrollContext } from "@/app/page";
 import Link from "next/link";
 
 const PHRASES = [
-  "Buat CV profesional dalam 2 menit dengan AI...",
-  "Bebas pusing mikirin format dan kata-kata...",
-  "Tingkatkan peluang dipanggil HRD 10x lipat..."
+  "Buat CV ATS friendly gratis dalam 2 menit...",
+  "CV profesional yang lolos seleksi HRD dengan AI...",
+  "Bikin CV online cepat, mudah, dan profesional...",
+  "Templates CV terbaik untuk fresh graduate & profesional...",
+  "AI merangkai CV Anda agar menarik perhatian recruiter..."
 ];
 
 export default function HeroSection() {
