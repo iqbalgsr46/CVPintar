@@ -17,6 +17,17 @@ export async function POST(request: Request) {
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
+    const targetPages = rawData.preferences?.pages || '1';
+    const lengthInstruction = targetPages === '2' 
+      ? `SANGAT PENTING — TARGET 2 LEMBAR CV:
+User meminta CV 2 lembar. Buat teks yang SANGAT DETAIL, PANJANG, dan MENDALAM.
+- Ringkasan Profil: Tulis 4-6 kalimat menyeluruh.
+- Pengalaman Kerja: Tulis summary 3-4 kalimat. Tulis 5-7 pencapaian SANGAT MENDETAIL (gunakan metode STAR: Situation, Task, Action, Result). Jangan ragu membuat deskripsi yang panjang dan elaboratif.`
+      : `SANGAT PENTING — TARGET 1 LEMBAR CV:
+User meminta CV 1 lembar. Buat teks yang PADAT, SINGKAT, dan EFEKTIF agar muat dalam 1 halaman.
+- Ringkasan Profil: Tulis maksimal 2-3 kalimat padat.
+- Pengalaman Kerja: Tulis summary maksimal 1-2 kalimat. Tulis 3-4 pencapaian (bullet point) yang langsung pada intinya (to the point). Hindari paragraf yang terlalu panjang agar tidak melebihi 1 halaman.`;
+
     const prompt = `Anda adalah konsultan HRD senior, ahli penulisan CV, dan pakar ATS (Applicant Tracking System) di Indonesia dengan pengalaman 15 tahun.
 
 ═══════════════════════════════════════
@@ -58,13 +69,12 @@ Jika user hanya menulis 1-2 keahlian sederhana, KEMBANGKAN menjadi daftar keahli
 
 Contoh:
 - User tulis: "menjahit" + pengalaman di garment → "Menjahit, Pengoperasian Mesin Jahit Industri, Quality Control Produk, Pemotongan Pola, Efisiensi Produksi, Kerja Tim"
-- User tulis: "excel" + pengalaman admin → "Microsoft Excel, Microsoft Word, Administrasi Perkantoran, Pengelolaan Arsip, Komunikasi Profesional"
-- User tulis: "masak" + pengalaman restoran → "Memasak, Food Preparation, Kitchen Management, Kebersihan & Sanitasi, Manajemen Stok Bahan"
+- User tulis: "komputer" + admin → "Microsoft Office (Excel, Word), Administrasi Data, Data Entry, Pengarsipan Dokumen, Komunikasi, Pelayanan Pelanggan"
 
 Simpan hasil pengembangan keahlian ini di field "skills" (timpa yang lama).
 
 ═══════════════════════════════════════
-ATURAN 4: DETEKSI LEVEL KARIR
+ATURAN 4: GAYA BAHASA RINGKASAN PROFIL
 ═══════════════════════════════════════
 Analisis total tahun pengalaman kerja user untuk menentukan level karir, lalu sesuaikan GAYA BAHASA:
 - 0-2 tahun → Fresh Graduate/Entry Level: Gunakan bahasa yang antusias tapi humble. Fokus pada potensi dan kemauan belajar.
@@ -81,11 +91,6 @@ Buat field "generatedSummary" berisi paragraf dalam Bahasa Indonesia baku.
 - Akhiri dengan kalimat tentang komitmen/dedikasi
 - Sesuaikan gaya bahasa dengan level karir (lihat Aturan 4)
 
-PENTING — SESUAIKAN PANJANG RINGKASAN:
-- Jika user punya 1 pengalaman kerja: Tulis ringkasan 4-5 kalimat yang detail dan menyeluruh.
-- Jika user punya 2 pengalaman kerja: Tulis ringkasan 3-4 kalimat yang seimbang.
-- Jika user punya 3+ pengalaman kerja: Tulis ringkasan 2-3 kalimat yang padat.
-
 ═══════════════════════════════════════
 ATURAN 6: GENERATE PENGALAMAN KERJA (STANDAR HRD & ATS)
 ═══════════════════════════════════════
@@ -96,14 +101,6 @@ Buat field "generatedExperience" berisi array object. Untuk SETIAP pengalaman ke
 - yearEnd: Wajib format "Bulan Tahun" (contoh: Desember 2023) atau "Sekarang". Jika user hanya menulis tahun, karang bulan yang masuk akal.
 - summary: Paragraf pengantar yang menjelaskan ruang lingkup peran, tanggung jawab harian, dan lingkungan kerja secara komprehensif. (string)
 - achievements: Array of strings. JANGAN gunakan simbol bullet.
-
-SANGAT PENTING — STANDAR KUALITAS HRD PROFESIONAL:
-CV harus terlihat penuh secara alami dengan deskripsi yang berkualitas tinggi, bukan sekadar basa-basi.
-Hitung jumlah total pengalaman kerja user, lalu sesuaikan:
-- 1 pengalaman: Tulis summary 3-4 kalimat. Tulis 5-6 pencapaian SANGAT MENDETAIL (gunakan metode STAR: Situation, Task, Action, Result).
-- 2 pengalaman: Tulis summary 2-3 kalimat. Tulis 4-5 pencapaian MENDETAIL (sebutkan tools, metrik, atau standar operasional).
-- 3+ pengalaman: Tulis summary 1-2 kalimat. Tulis 3-4 pencapaian KUAT per pekerjaan.
-(Catatan: Jangan pernah mengarang pengalaman kerja atau tempat kerja fiktif jika user tidak memberikannya).
 
 SANGAT PENTING — GUNAKAN CERITA ASLI USER:
 Setiap pengalaman kerja MUNGKIN memiliki field "description" yang berisi cerita singkat dari user tentang apa yang mereka kerjakan sehari-hari. 
@@ -116,7 +113,7 @@ Setiap bullet point (achievements) HARUS MENGANDUNG 3 KOMPONEN (Formula HRD):
 3. Result / Dampak (Apa hasil positifnya). DILARANG KERAS menggunakan angka persentase, simbol "%", ataupun kata "persen". Gunakan deskripsi kualitatif seperti "secara signifikan", "secara maksimal", "skala besar", atau gunakan angka/metrik bulat nyata (misal: "ribuan data", "puluhan klien").
 Contoh: "Mengoptimalkan proses input data transaksi harian menggunakan sistem internal perusahaan, yang berhasil mempercepat waktu pelaporan secara signifikan dan menekan angka kesalahan (human error) hingga titik terendah."
 
-Tujuannya: Teks harus cukup panjang, berbobot, dan mengalir secara natural untuk mengisi kertas A4, sehingga pengguna terlihat sangat profesional di mata rekruter.
+${lengthInstruction}
 
 ═══════════════════════════════════════
 FORMAT OUTPUT

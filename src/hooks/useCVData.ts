@@ -38,6 +38,9 @@ export type CVData = {
   courses: Course[];
   skills: string;
   experience: Experience[];
+  preferences?: {
+    pages: '1' | '2';
+  };
 };
 
 const defaultCVData: CVData = {
@@ -52,6 +55,9 @@ const defaultCVData: CVData = {
   courses: [],
   skills: '',
   experience: [],
+  preferences: {
+    pages: '1'
+  }
 };
 
 export function useCVData() {

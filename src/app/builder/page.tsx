@@ -10,6 +10,7 @@ import PersonalForm from '@/components/builder/PersonalForm';
 import ExperienceForm from '@/components/builder/ExperienceForm';
 import EducationForm from '@/components/builder/EducationForm';
 import SkillsForm from '@/components/builder/SkillsForm';
+import PreferencesForm from '@/components/builder/PreferencesForm';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -160,6 +161,10 @@ export default function BuilderPage() {
         
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as any, stiffness: 300, damping: 24 } } }}>
           <SkillsForm data={data} updateData={updateData} />
+        </motion.div>
+        
+        <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { type: 'spring' as any, stiffness: 300, damping: 24 } } }}>
+          <PreferencesForm data={data} updateData={updateData} />
         </motion.div>
         
         <motion.div variants={itemVariants} style={{ marginTop: '4rem', textAlign: 'center' }}>
