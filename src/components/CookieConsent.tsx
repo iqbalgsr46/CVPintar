@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Cookie } from 'lucide-react';
 
 export default function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
+  const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -13,18 +14,33 @@ export default function CookieConsent() {
     setMounted(true);
     const consent = localStorage.getItem('cvpintar_cookie_consent');
     if (!consent) {
-      const timer = setTimeout(() => setVisible(true), 3500);
-      return () => clearTimeout(timer);
+      // Wait for the splash screen to finish, then slide up smoothly
+      const handleSplashComplete = () => {
+        // Small delay so the splash fade-out starts first, then cookie sheet slides up
+        setTimeout(() => setShow(true), 600);
+      };
+      window.addEventListener('cvpintar-splash-complete', handleSplashComplete);
+      return () => window.removeEventListener('cvpintar-splash-complete', handleSplashComplete);
     }
   }, []);
+
+  // Trigger entrance animation after the sheet is rendered
+  useEffect(() => {
+    if (show) {
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setEntered(true));
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [show]);
 
   const handleDecision = (decision: 'accepted' | 'declined') => {
     localStorage.setItem('cvpintar_cookie_consent', decision);
     setLeaving(true);
-    setTimeout(() => setVisible(false), 400);
+    setTimeout(() => setShow(false), 500);
   };
 
-  if (!visible || !mounted) return null;
+  if (!show || !mounted) return null;
 
   return (
     <>
@@ -36,9 +52,8 @@ export default function CookieConsent() {
           background: 'rgba(15, 23, 42, 0.4)',
           backdropFilter: 'blur(2px)',
           zIndex: 999,
-          opacity: leaving ? 0 : 1,
-          transition: 'opacity 0.4s ease',
-          animation: 'none',
+          opacity: leaving ? 0 : entered ? 1 : 0,
+          transition: 'opacity 0.5s ease',
         }}
         onClick={() => handleDecision('declined')}
       />
@@ -51,7 +66,9 @@ export default function CookieConsent() {
           bottom: '1.25rem',
           transform: leaving
             ? 'translateX(-50%) translateY(120%)'
-            : 'translateX(-50%) translateY(0)',
+            : entered
+              ? 'translateX(-50%) translateY(0)'
+              : 'translateX(-50%) translateY(120%)',
           width: 'calc(100% - 2rem)',
           maxWidth: '420px',
           background: '#fff',
@@ -60,8 +77,9 @@ export default function CookieConsent() {
           zIndex: 1000,
           fontFamily: 'system-ui, -apple-system, sans-serif',
           boxShadow: '0 25px 60px rgba(0,0,0,0.2)',
-          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+          transition: 'transform 0.55s cubic-bezier(0.32, 1.25, 0.4, 1), opacity 0.35s ease',
           opacity: leaving ? 0 : 1,
+          willChange: 'transform, opacity',
         }}
       >
         {/* Top accent */}
@@ -134,8 +152,8 @@ export default function CookieConsent() {
               cursor: 'pointer',
               transition: 'all 0.2s',
             }}
-            onMouseOver={(e) => { e.currentTarget.color = '#64748b'; e.currentTarget.borderColor = '#cbd5e1'; }}
-            onMouseOut={(e) => { e.currentTarget.color = '#94a3b8'; e.currentTarget.borderColor = '#e2e8f0'; }}
+            onMouseOver={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = '#64748b'; el.style.borderColor = '#cbd5e1'; }}
+            onMouseOut={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = '#94a3b8'; el.style.borderColor = '#e2e8f0'; }}
           >
             Tolak
           </button>

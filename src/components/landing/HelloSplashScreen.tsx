@@ -8,6 +8,8 @@ export default function HelloSplashScreen({ onComplete }: { onComplete: () => vo
     // Show splash for 4 seconds to allow the drawing animation to finish, then trigger unmount
     const timer = setTimeout(() => {
       onComplete();
+      // Let other components (e.g. CookieConsent) know the splash finished
+      window.dispatchEvent(new Event('cvpintar-splash-complete'));
     }, 3500);
     return () => clearTimeout(timer);
   }, [onComplete]);
