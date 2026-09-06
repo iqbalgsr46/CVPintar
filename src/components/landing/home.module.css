@@ -210,12 +210,13 @@
   .actionContainer { margin-bottom: 4rem !important; }
 }
 
-/* Wider phones (391-540px): scale up proportionally so content doesn't look small */
-@media (min-width: 391px) and (max-width: 540px) {
-  .textContainer { margin-bottom: calc(2rem + (100vw - 390px) * 0.01) !important; }
-  .title { font-size: calc(1.6rem + (100vw - 390px) * 0.004) !important; }
-  .subtitle { font-size: calc(0.8rem + (100vw - 390px) * 0.0015) !important; max-width: calc(320px + (100vw - 390px) * 0.7); }
-  .cvMockup { max-width: calc(280px + (100vw - 390px) * 0.6); padding: calc(0.8rem + (100vw - 390px) * 0.005) !important; }
-  .primaryBtn { width: calc(320px + (100vw - 390px) * 0.5); padding: calc(1rem + (100vw - 390px) * 0.004) calc(2rem + (100vw - 390px) * 0.01); }
-  .scrollIndicator { bottom: calc(2rem + (100vw - 390px) * 0.01); }
+/* High-DPI phones (viewport 391-768px): scale proportionally so the 390px design doesn't shrink.
+   min(150px, ...) caps growth so tablets don't blow up beyond the 540px size. */
+@media (min-width: 391px) and (max-width: 768px) {
+  .textContainer { margin-bottom: calc(2rem + min(150px, (100vw - 390px)) * 0.01) !important; }
+  .title { font-size: calc(1.6rem + min(150px, (100vw - 390px)) * 0.004) !important; }
+  .subtitle { font-size: calc(0.8rem + min(150px, (100vw - 390px)) * 0.0015) !important; max-width: calc(320px + min(150px, (100vw - 390px)) * 0.7); }
+  .cvMockup { max-width: calc(280px + min(150px, (100vw - 390px)) * 0.6); padding: calc(0.8rem + min(150px, (100vw - 390px)) * 0.005) !important; }
+  .primaryBtn { width: calc(320px + min(150px, (100vw - 390px)) * 0.5); padding: calc(1rem + min(150px, (100vw - 390px)) * 0.004) calc(2rem + min(150px, (100vw - 390px)) * 0.01); }
+  .scrollIndicator { bottom: calc(2rem + min(150px, (100vw - 390px)) * 0.01); }
 }

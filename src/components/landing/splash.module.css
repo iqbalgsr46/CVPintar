@@ -272,13 +272,14 @@
   .ctaBtn { padding: 1rem 1.5rem !important; font-size: 1rem !important; }
 }
 
-/* Wider phones (391-540px): keep the exact 390px layout proportions but scale up so it doesn't look small */
-@media (min-width: 391px) and (max-width: 540px) {
+/* High-DPI phones (viewport 391-768px): scale proportionally so the 390px design doesn't shrink.
+   min(150px, ...) caps growth so tablets don't blow up beyond the 540px size. */
+@media (min-width: 391px) and (max-width: 768px) {
   .contentWrapper { padding: 0 2rem 2.25rem 2rem; }
-  .centerLogo { margin-top: calc(-40px - (100vw - 390px) * 0.05) !important; width: calc(80px + (100vw - 390px) * 0.14) !important; height: calc(80px + (100vw - 390px) * 0.14) !important; border-radius: 24px !important; }
-  .title { font-size: calc(2rem + (100vw - 390px) * 0.0035) !important; max-width: calc(320px + (100vw - 390px) * 0.5); }
-  .subtitle { font-size: calc(0.85rem + (100vw - 390px) * 0.0012) !important; max-width: calc(280px + (100vw - 390px) * 0.5); }
-  .promptText { font-size: calc(0.95rem + (100vw - 390px) * 0.001); }
-  .orderBtn { font-size: calc(0.85rem + (100vw - 390px) * 0.001); padding: 0.55rem 1.4rem; }
-  .scrollIndicator { font-size: calc(0.8rem + (100vw - 390px) * 0.001); }
+  .centerLogo { margin-top: calc(-40px - min(150px, (100vw - 390px)) * 0.05) !important; width: calc(80px + min(150px, (100vw - 390px)) * 0.14) !important; height: calc(80px + min(150px, (100vw - 390px)) * 0.14) !important; border-radius: 24px !important; }
+  .title { font-size: calc(2rem + min(150px, (100vw - 390px)) * 0.004) !important; max-width: calc(320px + min(150px, (100vw - 390px)) * 0.5); }
+  .subtitle { font-size: calc(0.85rem + min(150px, (100vw - 390px)) * 0.0015) !important; max-width: calc(280px + min(150px, (100vw - 390px)) * 0.5); }
+  .promptText { font-size: calc(0.95rem + min(150px, (100vw - 390px)) * 0.0012); }
+  .orderBtn { font-size: calc(0.85rem + min(150px, (100vw - 390px)) * 0.0012); padding: 0.55rem 1.4rem; }
+  .scrollIndicator { font-size: calc(0.8rem + min(150px, (100vw - 390px)) * 0.0012); }
 }
