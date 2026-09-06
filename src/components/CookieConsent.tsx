@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Cookie } from 'lucide-react';
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -42,8 +43,10 @@ export default function CookieConsent() {
       }}
     >
       <div style={{ maxWidth: '1024px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '200px' }}>
-          <span style={{ fontSize: '0.85rem' }}>🍪</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, minWidth: '200px' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '8px', background: '#f5f3ff', color: '#8b5cf6', flexShrink: 0 }}>
+            <Cookie size={16} strokeWidth={2} />
+          </span>
           <p style={{ fontSize: '0.82rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
             Kami menggunakan cookie esensial untuk keamanan & fungsionalitas.{' '}
             <Link href="/kebijakan-privasi" style={{ color: '#8b5cf6', fontWeight: 600 }}>
